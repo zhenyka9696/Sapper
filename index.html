@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet">
+    <title>Sapper</title>
+</head>
+<body>
+    <div class="timeCounter">
+        <h1><time>00:00:00</time></h1>
+        <button id="start">start</button>
+        <button id="stop">stop</button>
+        <button id="reset">reset</button>
+    </div>
+    <span></span>
+    <div class = "column-left">
+        <div class="settings">
+            <label for="boardSize">Field size</label>
+            <input id="boardSize" type = "range" value = "10" min = "4" max = "20">
+            <label for="tileSize">Tile size</label>
+            <input id="tileSize" type = "range" min = "10" max = "100" step = "10">
+            <fieldset>
+                <input type="radio" id="easy" name="difficulty" value="0.1" class="difficulty">
+                <label for = "easy">Easy</label>
+                <input type="radio" id="normal" name="difficulty" value = "0.2"
+                    class="difficulty" checked>
+                <label for="normal">Normal</label>
+                <input type="radio" id="hard" name="difficulty" value="0.4" class="difficulty">
+                <label for="hard">Hard</label>
+            </fieldset>
+            </div>
+        </div>
+    <div class="column-right"></div>
+        <a href="https://www.linkedin.com/in/evgeniy-prokhorov-8b3b64249/"
+         class="sapper-btn">Subscribe me. I need your support! Thanks for the attention</a>
+    </div>
+    <div class="board-wrap">
+        <div class="board"></div>
+    </div>
+    <div class="endscreen"></div>
+    <script src="./sapper.js"></script>
+</body>
+</html>
