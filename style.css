@@ -43,6 +43,7 @@
     box-sizing: content-box;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
         0 16px 20px rgba(0, 0, 0, 0.2);
+
 }
 
 .board .tile{
@@ -74,10 +75,12 @@
     inset 2px 0 0 0 #1f2020c5,
         inset 0 -2px 0 0 rgba(26, 65, 56, 0.555),
             inset -2px 0 0 0 rgba(43, 119, 94, 0.329);
+
 }
 
 .board .tile--checked.tile--bomb:before, .board .tile--checked.tile--bomb:after{
     opacity: 1;
+
 }
 
 .board .tile--checked:hover{
@@ -86,10 +89,12 @@
 
 .board .tile--bomb{
     font-size: calc(var(--tileSize)* .5);
+
 }
 
 .board .tile--flagged{
     font-size: calc(var(--tileSize)* .5);
+
 }
 
 .sapper-btn {
@@ -110,19 +115,24 @@
     outline: none !important;
     border: none;
     text-decoration: none;
+
 }
 
 .sapper-btn:hover{
     background-color: rgba(139, 158, 124, 0.39);
     color: rgba(114, 103, 8, 0.425);
+
 }
 
 .settings fieldset{
     border: none;
+	width:100%;
 }
 
 .settings input[type=radio]{
     display: none;
+		width:100%;
+	
 }
 
 .settings label{
@@ -135,6 +145,8 @@
     transition: .4s all;
     color: #e5f13b21;
     font-weight: bold!important;
+
+
 }
 
 .settings input [type=radio] + label{
@@ -158,6 +170,7 @@
 
 .settings input[type=radio] + label:before{
     border-radius: 100%;
+	
 }
 
 .settings input[type=radio]:checked + label:before{
@@ -178,9 +191,27 @@
         transform: scale(0.5);
         width: calc(100% + 360px);
         left: -180px;
-    }
+}
 }
 
-.timeCounter{
+/*.time-counter{
     font-size: 14px;
+}*/
+.attachment-block{
+	display: flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	align-content: center;
+	justify-content: space-between;
+	align-items: baseline;
+	font-size: 15px;
+}
+.score-counter{
+	display: flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	align-content: center;
+	justify-content: space-between;
+	align-items: baseline;
+	font-size : 25px;
 }

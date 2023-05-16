@@ -8,13 +8,18 @@
     <title>Sapper</title>
 </head>
 <body>
-    <div class="timeCounter">
+	<div class="attachment-block">
+    <div class="time-counter">
         <h1><time>00:00:00</time></h1>
         <button id="start">start</button>
         <button id="stop">stop</button>
         <button id="reset">reset</button>
     </div>
-    <span></span>
+    <div class="score-counter">
+        <div class = "score-text">Score: </div>
+		<div id = "score-count"></div>
+    </div>
+	</div>
     <div class = "column-left">
         <div class="settings">
             <label for="boardSize">Field size</label>
@@ -32,10 +37,16 @@
             </fieldset>
             </div>
         </div>
-    <div class="column-right"></div>
+    <div class="column-right">
         <a href="https://www.linkedin.com/in/evgeniy-prokhorov-8b3b64249/"
-         class="sapper-btn">Subscribe me. I need your support! Thanks for the attention</a>
+         class="sapper-btn">Subscribe me. I need your support! Thanks for the attention</a> <br>
+		<a href="#" class="sapper-btn" onclick="location.reload(); return false;">
+		New game
+		</a>
     </div>
+
+
+
     <div class="board-wrap">
         <div class="board"></div>
     </div>
