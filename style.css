@@ -223,6 +223,15 @@
 	align-items: baseline;
 	font-size : 25px;
 }
+.clicks-counter{
+	display: flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	align-content: center;
+	justify-content: space-between;
+	align-items: baseline;
+	font-size : 25px;
+}
 
 html{
     background-image: url(./chernika.jpg);

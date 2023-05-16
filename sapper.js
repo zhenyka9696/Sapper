@@ -76,9 +76,7 @@ const setup = () => {
         e.preventDefault();
         flag(tile);
     }
-    tile.addEventListener('click', function(e){
-        clickTile(tile);
-    });
+ 
     });
 	numbers.forEach(num => {
 		let coords = num.split(',');
@@ -155,9 +153,8 @@ const clickTile = (tile) => {
         let num = tile.getAttribute('data-num');
         if (num!=null){
             tile.classList.add('data-num');
-			standartClicks++;
-			console.log('standartClicks = ' + standartClicks);
-			//standart clicks
+
+			//standart clicks//v1.0.0
             tile.innerHTML = num;
             tile.style.color = numberColors [num - 1];
             setTimeout(() => {
