@@ -13,7 +13,7 @@ const difficultyBtns = document.querySelectorAll('.difficulty');
 let bombs = [];
 let numbers = [];
 let numberColors = ['#2498df', '#7ecc73', '#e74c3b', '#eb59b4', '#f1c40f', '#1abc9c','#34495e', '#7f8c8d',];
-let endscreenContent = {win: '<span>✔ you have won!</span>',loose: '💣 Boom! Game over.'};//
+let endscreenContent = {win: 'You have won!',loose: '💣 Boom! Game over.'};
 let gameOver = false;
 let h1 =document.getElementsByTagName('h1')[0];
 let start = document.getElementById('start');
@@ -76,7 +76,12 @@ const setup = () => {
         e.preventDefault();
         flag(tile);
     }
- 
+    tile.addEventListener('click', function(e){
+        standartClicks++;
+        document.getElementById("clicks-count").innerHTML=standartClicks;
+		console.log('standartClicks = ' + standartClicks);
+        clickTile(tile);
+    });
     });
 	numbers.forEach(num => {
 		let coords = num.split(',');
@@ -96,13 +101,12 @@ const flag = (tile) => {
         }
         else{
             tile.innerHTML = '';
-            this.classList.remove('tile--flagged');
+            tile.classList.remove('tile--flagged');
         }
     }
 }
 
 const clickTile = (tile) => {
-
 	if (timeCounter == false){
         function tick(){
             sec++;
@@ -131,6 +135,7 @@ const clickTile = (tile) => {
         start.onclick = timer;
         stop.onclick = function(){
             clearTimeout(t);
+            
         }
         reset.onclick = function(){
             clearTimeout(t);
@@ -152,7 +157,7 @@ const clickTile = (tile) => {
     else {
         let num = tile.getAttribute('data-num');
         if (num!=null){
-            tile.classList.add('data-num');
+            tile.classList.add('tile-checked');
 
 			//standart clicks//v1.0.0
             tile.innerHTML = num;
@@ -231,8 +236,8 @@ const checkVictory = () => {
     let win = true;
     tiles.forEach(tile => {
         let coordinate = tile.getAttribute('data-tile');
-        if (!tile.classList.contains('tile--checked')&&
-        !bombs.includes(coordinate)) win = false;
+        if (!tile.classList.contains('tile--checked')&&!bombs.includes(coordinate))
+        win = false;
     });
     if (win) {
         endscreen.innerHTML=endscreenContent.win;
@@ -240,7 +245,6 @@ const checkVictory = () => {
         gameOver = true;
     }
 }
-
 
 setup();
 restartBtn.addEventListener('click',function(e){
