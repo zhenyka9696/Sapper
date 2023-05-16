@@ -5,6 +5,7 @@
 
 .endscreen {
     background: rgba(56, 32, 18, 0.178);
+    /*background: blue;*/
     padding: 20px;
     text-align: center;
     font-size: 40px;
@@ -34,6 +35,7 @@
 
 .board{
     background: rgba(87, 82, 81, 0.712);
+    /*background: blue;*/
     position: relative;
     display: flex;
     flex-direction: row;
@@ -48,6 +50,7 @@
 
 .board .tile{
     background: rgba(33, 29, 34, 0.842);
+    /*background: blue;*/
     width: var(--tileSize);
     height: var(--tileSize);
     position: relative;
@@ -67,10 +70,12 @@
 
 .board .tile:hover:not(.tile--checked){
     background: rgba(28, 36, 33, 0.548);
+    /*background: blue;*/
 }
 
 .board .tile--checked{
     background: rgba(111, 21, 138, 0.418);
+    /*background: blue;*/
     box-shadow: inset 0 2px 0 0 rgba(46, 45, 3, 0.212),
     inset 2px 0 0 0 #1f2020c5,
         inset 0 -2px 0 0 rgba(26, 65, 56, 0.555),
@@ -99,12 +104,13 @@
 
 .sapper-btn {
     display: inline-block;
-    padding: 0 40 px;
+    padding: 0 40px;
     height: 50px;
     margin-bottom: 20px;
     text-align: center;
     font-family: 'Roboto Condensed', sans-serif;
     background-color: rgba(114, 121, 103, 0.007);
+    /*background-color: blue;*/
     border-radius: 2px;
     font-size: 20px;
     font-weight: bold;
@@ -120,13 +126,14 @@
 
 .sapper-btn:hover{
     background-color: rgba(139, 158, 124, 0.39);
-    color: rgba(114, 103, 8, 0.425);
+    color: blue;
+    /*color: rgba(114, 103, 8, 0.425);*/
 
 }
 
 .settings fieldset{
     border: none;
-	width:100%;
+	width:50%;
 }
 
 .settings input[type=radio]{
@@ -136,14 +143,15 @@
 }
 
 .settings label{
-    margin: 12px 0;
+    margin: 12px 24px;
     display: inline-block;
     position: relative;
     cursor: pointer;
     font-size: 13px;
     line-height: 18px;
     transition: .4s all;
-    color: #e5f13b21;
+    /*color: #e5f13b21;*/
+    color:blue;
     font-weight: bold!important;
 
 
@@ -214,4 +222,15 @@
 	justify-content: space-between;
 	align-items: baseline;
 	font-size : 25px;
+}
+
+html{
+    background-image: url(./chernika.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover ;
+    -moz-background-size:cover;
+    -o-background-size: cover ;
+    background-size: cover;
 }
