@@ -23,6 +23,8 @@ let sec = 0;
 let min = 0;
 let hours = 0;
 let timeCounter = false;
+let scoreCounter = 0;
+let standartClicks = 0;
 
 const clear = () => {
     gameOver = false;
@@ -102,32 +104,8 @@ const flag = (tile) => {
 }
 
 const clickTile = (tile) => {
-    if (gameOver) return;
-    if (tile.classList.contains('tile--checked') || tile.classList.contains('tile-flagged')) return;
-    let coordinate =tile.getAttribute('data-tile');
-    if (bombs.includes(coordinate)) {
-        endGame(tile);
-    }
-    else {
-        let num = tile.getAttribute('data-num');
-        if (num!=null){
-            tile.classList.add('data-num');
-            tile.innerHTML = num;
-            tile.style.color = numberColors [num - 1];
-            setTimeout(() => {
-                checkVictory();
-            },100);
-            return;
-        }
-        checkTile(tile, coordinate);
-    }
-    tile.classList.add('tile--checked');
-}
 
-const checkTile = (tile, coordinate) => {
-    console.log ('timeCounter = ' + timeCounter);
-    if (timeCounter == false){
-        
+	if (timeCounter == false){
         function tick(){
             sec++;
             if(sec >= 60){
@@ -166,7 +144,37 @@ const checkTile = (tile, coordinate) => {
         }
         timeCounter = true;
         }
+	
+    if (gameOver) return;
+    if (tile.classList.contains('tile--checked') || tile.classList.contains('tile-flagged')) return;
+    let coordinate =tile.getAttribute('data-tile');
+    if (bombs.includes(coordinate)) {
+        endGame(tile);
+    }
+    else {
+        let num = tile.getAttribute('data-num');
+        if (num!=null){
+            tile.classList.add('data-num');
+			standartClicks++;
+			console.log('standartClicks = ' + standartClicks);
+			//standart clicks
+            tile.innerHTML = num;
+            tile.style.color = numberColors [num - 1];
+            setTimeout(() => {
+                checkVictory();
+            },100);
+            return;
+        }
+        checkTile(tile, coordinate);
+    }
+    tile.classList.add('tile--checked');
+}
+
+const checkTile = (tile, coordinate) => {
     console.log('✔');
+	scoreCounter++;
+	document.getElementById("score-count").innerHTML=scoreCounter;
+	console.log("scoreCounter = " + scoreCounter);
     let coords = coordinate.split(',');
     let x = parseInt(coords[0]);
     let y = parseInt(coords[1]);
