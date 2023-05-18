@@ -1,6 +1,6 @@
 console.clear();
 let size = 10;
-let bombFrequancy = 0.2;
+let bombFrequency = 0.2;
 let tileSize = 50;
 const board = document.querySelectorAll('.board')[0];
 let tiles;
@@ -25,6 +25,9 @@ let hours = 0;
 let timeCounter = false;
 let scoreCounter = 0;
 let standartClicks = 0;
+//var saves = ["clicks: "];
+var clickSaves = ["clicks: "];
+var scoreSaves = ["score: "];
 
 const clear = () => {
     gameOver = false;
@@ -53,7 +56,7 @@ const setup = () => {
     let y = 0;
     tiles.forEach((tile,i) => {
         tile.setAttribute('data-tile', `${x},${y}`);
-        let random_boolean = Math.random() < bombFrequancy;
+        let random_boolean = Math.random() < bombFrequency;
 		if (random_boolean) {
 			bombs.push(`${x},${y}`);
 			if (x > 0) numbers.push(`${x-1},${y}`);
@@ -80,6 +83,10 @@ const setup = () => {
         standartClicks++;
         document.getElementById("clicks-count").innerHTML=standartClicks;
 		console.log('standartClicks = ' + standartClicks);
+		saves.push(standartClicks);
+		console.log(saves);
+		let sound3 = document.getElementById("audio3");
+		sound3.play();
         clickTile(tile);
     });
     });
@@ -95,9 +102,9 @@ const setup = () => {
 const flag = (tile) => {
     if (gameOver) return;
     if (!tile.classList.contains('tile--checked')){
-        if (!tile.classList.contains('tile--flaged')){
+        if (!tile.classList.contains('tile--flagged')){
             tile.innerHTML = '🚩'; // I am not sure
-            tile.classList.add('tile--flaged');
+            tile.classList.add('tile--flagged');
         }
         else{
             tile.innerHTML = '';
@@ -149,7 +156,7 @@ const clickTile = (tile) => {
         }
 	
     if (gameOver) return;
-    if (tile.classList.contains('tile--checked') || tile.classList.contains('tile-flagged')) return;
+    if (tile.classList.contains('tile--checked') || tile.classList.contains('tile--flagged')) return;
     let coordinate =tile.getAttribute('data-tile');
     if (bombs.includes(coordinate)) {
         endGame(tile);
@@ -157,7 +164,7 @@ const clickTile = (tile) => {
     else {
         let num = tile.getAttribute('data-num');
         if (num!=null){
-            tile.classList.add('tile-checked');
+            tile.classList.add('tile--checked');
 
 			//standart clicks//v1.0.0
             tile.innerHTML = num;
@@ -177,6 +184,10 @@ const checkTile = (tile, coordinate) => {
 	scoreCounter++;
 	document.getElementById("score-count").innerHTML=scoreCounter;
 	console.log("scoreCounter = " + scoreCounter);
+	saves.push(scoreCounter);
+	console.log(saves);
+	let sound1 = document.getElementById("audio1");
+	sound1.play();
     let coords = coordinate.split(',');
     let x = parseInt(coords[0]);
     let y = parseInt(coords[1]);
@@ -219,6 +230,8 @@ const checkTile = (tile, coordinate) => {
 }
 const endGame = (tile) => {
 	console.log('💣 Booom! Game over.');
+	standartClicks.push(clickSaves);//!!!
+	scoreCounter.push(scoreSaves);
 	endscreen.innerHTML=endscreenContent.loose;
 	endscreen.classList.add('show');
 	gameOver = true;
@@ -240,6 +253,8 @@ const checkVictory = () => {
         win = false;
     });
     if (win) {
+		let sound2 = document.getElementById("audio2");
+		sound2.play();
         endscreen.innerHTML=endscreenContent.win;
         endscreen.classList.add('show');
         gameOver = true;
@@ -267,7 +282,7 @@ boardSizeBtn.addEventListener('change',function(e){
 difficultyBtns.forEach(btn => {
     btn.addEventListener('click',function(){
         console.log(this.value);
-        bombFrequancy = this.value;
+        bombFrequency = this.value;
         clear();
     });
 });
