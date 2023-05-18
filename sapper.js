@@ -1,3 +1,4 @@
+let input = "";
 console.clear();
 let size = 10;
 let bombFrequency = 0.2;
@@ -24,10 +25,16 @@ let min = 0;
 let hours = 0;
 let timeCounter = false;
 let scoreCounter = 0;
+let scoreCounterForPush = 0;
 let standartClicks = 0;
-//var saves = ["clicks: "];
-var clickSaves = ["clicks: "];
-var scoreSaves = ["score: "];
+let standartClicksForPush = 0;
+let saves = [];
+let clickSaves = [];//"clicks: "
+let scoreSaves = [];//"score: "
+let clickSaveInf="";
+let scoreSaveInf="";
+let scoreText=[];
+let dataDownload = [];
 
 const clear = () => {
     gameOver = false;
@@ -83,8 +90,9 @@ const setup = () => {
         standartClicks++;
         document.getElementById("clicks-count").innerHTML=standartClicks;
 		console.log('standartClicks = ' + standartClicks);
-		saves.push(standartClicks);
-		console.log(saves);
+        standartClicksForPush=standartClicks;
+		clickSaves.push(standartClicksForPush);
+		console.log("clickSaves: " + clickSaves);
 		let sound3 = document.getElementById("audio3");
 		sound3.play();
         clickTile(tile);
@@ -103,7 +111,7 @@ const flag = (tile) => {
     if (gameOver) return;
     if (!tile.classList.contains('tile--checked')){
         if (!tile.classList.contains('tile--flagged')){
-            tile.innerHTML = '🚩'; // I am not sure
+            tile.innerHTML = '🚩';
             tile.classList.add('tile--flagged');
         }
         else{
@@ -150,7 +158,6 @@ const clickTile = (tile) => {
             sec = 0;
             min = 0;
             hours = 0;
-            //seconds = 0; minutes = 0; Houres = 0;
         }
         timeCounter = true;
         }
@@ -165,8 +172,6 @@ const clickTile = (tile) => {
         let num = tile.getAttribute('data-num');
         if (num!=null){
             tile.classList.add('tile--checked');
-
-			//standart clicks//v1.0.0
             tile.innerHTML = num;
             tile.style.color = numberColors [num - 1];
             setTimeout(() => {
@@ -184,8 +189,10 @@ const checkTile = (tile, coordinate) => {
 	scoreCounter++;
 	document.getElementById("score-count").innerHTML=scoreCounter;
 	console.log("scoreCounter = " + scoreCounter);
-	saves.push(scoreCounter);
-	console.log(saves);
+
+    scoreCounterForPush=scoreCounter;
+    scoreSaves.push(scoreCounterForPush);
+    console.log("scoreSaves: " + scoreSaves);
 	let sound1 = document.getElementById("audio1");
 	sound1.play();
     let coords = coordinate.split(',');
@@ -230,9 +237,17 @@ const checkTile = (tile, coordinate) => {
 }
 const endGame = (tile) => {
 	console.log('💣 Booom! Game over.');
-	standartClicks.push(clickSaves);//!!!
-	scoreCounter.push(scoreSaves);
-	endscreen.innerHTML=endscreenContent.loose;
+    scoreSaveInf = scoreSaves.pop();
+    clickSaveInf = clickSaves.pop();
+    console.log("scoreSaveInf : " + scoreSaveInf);
+    console.log("clickSaveInf : " + clickSaveInf);
+    scoreText = ("scoreSaveInf : " + scoreSaveInf + "clickSaveInf : " + clickSaveInf);
+    dataDownload = 'data:application/txt;charset=utf-8,' + encodeURIComponent(scoreText);
+    this.href = dataDownload;
+    this.download = 'data.txt';
+    //input = prompt ("scoreSaveInf : " + scoreSaveInf + "clickSaveInf : " + clickSaveInf);
+    //require("fs").writeFileSync("Total score.txt", input);
+ 	endscreen.innerHTML=endscreenContent.loose;
 	endscreen.classList.add('show');
 	gameOver = true;
 	tiles.forEach(tile => {
@@ -253,10 +268,19 @@ const checkVictory = () => {
         win = false;
     });
     if (win) {
-		let sound2 = document.getElementById("audio2");
+        let sound2 = document.getElementById("audio2");
 		sound2.play();
         endscreen.innerHTML=endscreenContent.win;
         endscreen.classList.add('show');
+        scoreSaveInf = scoreSaves.pop();
+        clickSaveInf = clickSaves.pop();
+        console.log("scoreSaveInf : " + scoreSaveInf);
+        console.log("clickSaveInf : " + clickSaveInf);
+        scoreText = ("scoreSaveInf : " + scoreSaveInf + "clickSaveInf : " + clickSaveInf);
+        dataDownload = 'data:application/txt;charset=utf-8,' + encodeURIComponent(scoreText);
+        this.href = dataDownload;
+        this.download = 'data.txt';
+        //require("fs").writeFileSync("Total score.txt", input);
         gameOver = true;
     }
 }
@@ -272,13 +296,11 @@ boardSizeBtn.addEventListener('change',function(e){
     tileSize = 70 - (size*2);
     clear();
 });
-//?
 	tileSizeBtn.addEventListener('change', function(e) {
 	console.log(this.value);
 	tileSize = this.value;
 	clear();
 	});
-//?
 difficultyBtns.forEach(btn => {
     btn.addEventListener('click',function(){
         console.log(this.value);
