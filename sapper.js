@@ -35,6 +35,7 @@ let clickSaveInf="";
 let scoreSaveInf="";
 let scoreText=[];
 let dataDownload = [];
+let scoreGreen = false;
 
 const clear = () => {
     gameOver = false;
@@ -239,12 +240,13 @@ const checkTile = (tile, coordinate) => {
 const endGame = (tile) => {
 	if (standartClicks>1){
 	console.log('💣 Booom! Game over.');
-    scoreSaveInf = scoreSaves.pop();
+    //scoreSaveInf = scoreSaves.pop();
     clickSaveInf = clickSaves.pop();
-    console.log("scoreSaveInf : " + scoreSaveInf);
-    console.log("clickSaveInf : " + clickSaveInf);
-		scoreText = ("scoreSaveInf : " + scoreSaveInf + "\n" + "clickSaveInf : " + clickSaveInf);
-		document.getElementById('todownload').onclick = function() {
+    //console.log("scoreSaveInf : " + scoreSaveInf);
+    console.log("clickSaveInf = " + clickSaveInf);
+    scoreGreen = true;
+	scoreText = ("scoreSaveInf : " + scoreCounter + "\n" + "clickSaveInf : " + clickSaveInf);
+	document.getElementById('todownload').onclick = function() {
 		dataDownload = 'data:application/txt;charset=utf-8,' + encodeURIComponent(scoreText);
 		this.href = dataDownload;
 		this.download = 'data.txt';
@@ -261,7 +263,24 @@ const endGame = (tile) => {
 		}
 	});
 	}
+
+    else{
+        console.log('✔');
+        scoreCounter=0;
+        document.getElementById("score-count").innerHTML=scoreCounter;
+        console.log("scoreCounter = " + scoreCounter);
+        scoreCounterForPush=scoreCounter;
+        scoreSaves.push(scoreCounterForPush);
+        
+        scoreSaveInf[0] = 0;
+        console.log("scoreSaveInf and scoreCounter = " + scoreCounter);
+    }
 }
+
+/*if(scoreGreen){//not working?
+    scoreSaveInf = scoreSaves.pop();
+    console.log("scoreSaveInf = " + scoreSaveInf);        
+    }*/
 
 const checkVictory = () => {
     let win = true;
