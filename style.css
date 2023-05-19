@@ -202,9 +202,6 @@
 }
 }
 
-/*.time-counter{
-    font-size: 14px;
-}*/
 .attachment-block{
 	display: flex;
 	flex-direction:row;
@@ -242,4 +239,8 @@ html{
     -moz-background-size:cover;
     -o-background-size: cover ;
     background-size: cover;
+}
+
+#todownload{
+    margin: 12px 14px 12px 22px;
 }
