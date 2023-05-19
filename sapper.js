@@ -96,6 +96,7 @@ const setup = () => {
 		let sound3 = document.getElementById("audio3");
 		sound3.play();
         clickTile(tile);
+		
     });
     });
 	numbers.forEach(num => {
@@ -236,20 +237,21 @@ const checkTile = (tile, coordinate) => {
 	}, 10);
 }
 const endGame = (tile) => {
+	if (standartClicks>1){
 	console.log('💣 Booom! Game over.');
     scoreSaveInf = scoreSaves.pop();
     clickSaveInf = clickSaves.pop();
     console.log("scoreSaveInf : " + scoreSaveInf);
     console.log("clickSaveInf : " + clickSaveInf);
-    scoreText = ("scoreSaveInf : " + scoreSaveInf + "clickSaveInf : " + clickSaveInf);
-    dataDownload = 'data:application/txt;charset=utf-8,' + encodeURIComponent(scoreText);
-    this.href = dataDownload;
-    this.download = 'data.txt';
-    //input = prompt ("scoreSaveInf : " + scoreSaveInf + "clickSaveInf : " + clickSaveInf);
-    //require("fs").writeFileSync("Total score.txt", input);
+		scoreText = ("scoreSaveInf : " + scoreSaveInf + "\n" + "clickSaveInf : " + clickSaveInf);
+		document.getElementById('todownload').onclick = function() {
+		dataDownload = 'data:application/txt;charset=utf-8,' + encodeURIComponent(scoreText);
+		this.href = dataDownload;
+		this.download = 'data.txt';
+		}
  	endscreen.innerHTML=endscreenContent.loose;
 	endscreen.classList.add('show');
-	gameOver = true;
+	 gameOver = true;
 	tiles.forEach(tile => {
 		let coordinate = tile.getAttribute('data-tile');
 		if (bombs.includes(coordinate)) {
@@ -258,6 +260,7 @@ const endGame = (tile) => {
 			tile.innerHTML = '💣';
 		}
 	});
+	}
 }
 
 const checkVictory = () => {
@@ -276,12 +279,13 @@ const checkVictory = () => {
         clickSaveInf = clickSaves.pop();
         console.log("scoreSaveInf : " + scoreSaveInf);
         console.log("clickSaveInf : " + clickSaveInf);
-        scoreText = ("scoreSaveInf : " + scoreSaveInf + "clickSaveInf : " + clickSaveInf);
-        dataDownload = 'data:application/txt;charset=utf-8,' + encodeURIComponent(scoreText);
-        this.href = dataDownload;
-        this.download = 'data.txt';
-        //require("fs").writeFileSync("Total score.txt", input);
-        gameOver = true;
+		scoreText = ("scoreSaveInf : " + scoreSaveInf + "\n" + "clickSaveInf : " + clickSaveInf);
+		document.getElementById('todownload').onclick = function() {
+		dataDownload = 'data:application/txt;charset=utf-8,' + encodeURIComponent(scoreText);
+		this.href = dataDownload;
+		this.download = 'data.txt';
+}
+		gameOver = true;
     }
 }
 
